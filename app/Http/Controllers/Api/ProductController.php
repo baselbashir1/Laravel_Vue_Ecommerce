@@ -31,6 +31,21 @@ class ProductController extends Controller
         return ProductListResource::collection($query);
     }
 
+    // index function in another way.
+    // public function index(Request $request)
+    // {
+    //     $perPage = $request->query('per_page', 10);
+    //     $search = $request->query('search', '');
+    //     $sortField = $request->query('sort_field', 'updated_at');
+    //     $sortDirection = $request->query('sort_direction', 'desc');
+
+    //     $products = Product::where('title', 'like', "%{$search}%")
+    //         ->orderBy($sortField, $sortDirection)
+    //         ->paginate($perPage);
+
+    //     return ProductListResource::collection($products);
+    // }
+
     public function store(ProductRequest $request)
     {
         // return new ProductResource(Product::create($request->validated()));
