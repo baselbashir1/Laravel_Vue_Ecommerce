@@ -23,8 +23,7 @@ class CartController extends Controller
             $total += $product->price * $cartItems[$product->id]['quantity'];
         }
 
-        // return view('cart.index', ['cartItems' => [$products, $total]]);
-        return view('cart.index', ['cartItems' => compact('products', 'total')]);
+        return view('cart.index', compact('cartItems', 'products', 'total'));
     }
 
     public function add(Request $request, Product $product)
