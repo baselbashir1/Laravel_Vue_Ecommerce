@@ -15,6 +15,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "@alpinejs/collapse": "^3.12.1"
+        "@alpinejs/collapse": "^3.12.1",
+        "lodash": "^4.17.21"
     }
 }

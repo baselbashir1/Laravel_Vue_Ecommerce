@@ -3,12 +3,13 @@
 namespace App\Http\Helpers;
 
 use App\Models\CartItem;
+use Exception;
 
 class Cart
 {
     public static function getCartItemsCount(): int
     {
-        $request = request();
+        $request = \request();
         $user = $request->user();
 
         if ($user) {
@@ -17,20 +18,20 @@ class Cart
             $cartItems = self::getCookieCartItems();
 
             return array_reduce(
-                $cartItems,
-                fn ($carry, $item) => $carry + $item['quantity'],
-                0
+                $cartItems, // array - which is the array to be reduced.
+                fn ($carry, $item) => $item !== null && isset($item['quantity']) ? $carry + $item['quantity'] : $carry, // for each item in cartItems.
+                0 // Initial value for carry.
             );
         }
     }
 
     public static function getCartItems()
     {
-        $request = request();
+        $request = \request();
         $user = $request->user();
 
         if ($user) {
-            return CartItem::where('user_id', $user->id)->map(
+            return CartItem::where('user_id', $user->id)->get()->map(
                 fn ($item) => ['product_id' => $item->product_id, 'quantity' => $item->quantity]
             );
         } else {
@@ -40,35 +41,34 @@ class Cart
 
     public static function getCookieCartItems()
     {
-        $request = request();
+        $request = \request();
         return json_decode($request->cookie('cart_items', '[]'), true);
     }
 
-    public static function getCountFormItems($cartItems)
+    public static function getCountFromItems($cartItems)
     {
         return array_reduce(
-            $cartItems,
-            fn ($carry, $item) => $carry + $item['quantity'],
-            0
+            $cartItems, // array - which is the array to be reduced.
+            fn ($carry, $item) => $item !== null && isset($item['quantity']) ? $carry + $item['quantity'] : $carry, // for each item in cartItems.
+            0 // Initial value for carry.
         );
     }
 
-    public static function moveCartItemsIntoDB()
+    public static function moveCartItemsIntoDb()
     {
-        $request = request();
+        $request = \request();
         $cartItems = self::getCookieCartItems();
-        $dbCartItems = CartItem::where(['user_id', $request->user()->id])->get()->keyBy('product_id');
+        $dbCartItems = CartItem::where(['user_id' => $request->user()->id])->get()->keyBy('product_id');
         $newCartItems = [];
 
         foreach ($cartItems as $cartItem) {
             if (isset($dbCartItems[$cartItem['product_id']])) {
                 continue;
             }
-
-            $newCartItems = [
+            $newCartItems[] = [
                 'user_id' => $request->user()->id,
                 'product_id' => $cartItem['product_id'],
-                'quantity' => $cartItem['quantity']
+                'quantity' => $cartItem['quantity'],
             ];
         }
 

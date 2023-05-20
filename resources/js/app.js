@@ -1,14 +1,14 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
-import collapse from '@alpinejs/collapse';
-import { post } from './http.js';
+import collapse from '@alpinejs/collapse'
+import { get, post } from "./http.js";
 
 Alpine.plugin(collapse)
 
 window.Alpine = Alpine;
 
-document.addEventListener("alpine:init", () => {
+document.addEventListener("alpine:init", async () => {
 
     Alpine.data("toast", () => ({
         visible: false,
@@ -55,33 +55,38 @@ document.addEventListener("alpine:init", () => {
         return {
             product,
             addToCart(quantity = 1) {
-                post(this.product.addToCartUrl, { quantity }).then(result => {
-                    this.$dispatch('cart-change', { count: result.count })
-                    this.$dispatch('notify', {
-                        message: 'The item was added into the cart',
+                post(this.product.addToCartUrl, { quantity })
+                    .then(result => {
+                        this.$dispatch('cart-change', { count: result.count })
+                        this.$dispatch("notify", {
+                            message: "The item was added into the cart",
+                        });
                     })
-                }).catch(response => {
-                    console.log(response)
-                })
+                    .catch(response => {
+                        console.log(response);
+                    })
             },
             removeItemFromCart() {
-                post(this.product.removeUrl).then(result => {
-                    this.$dispatch('notify', {
-                        message: 'The item was removed from the cart',
+                post(this.product.removeUrl)
+                    .then(result => {
+                        this.$dispatch("notify", {
+                            message: "The item was removed from cart",
+                        });
+                        this.$dispatch('cart-change', { count: result.count })
+                        this.cartItems = this.cartItems.filter(p => p.id !== product.id)
                     })
-                    this.$dispatch('cart-change', { count: result.count })
-                    this.cartItems = this.cartItems.filter(p => p.id !== product.id)
-                })
             },
             changeQuantity() {
-                post(this.product.updateQuantityUrl, { quantity: product.quantity }).then(result => {
-                    this.$dispatch('cart-change', { count: result.count })
-                    this.$dispatch('notify', { message: 'The item quantity was updated' })
-                })
-            }
+                post(this.product.updateQuantityUrl, { quantity: product.quantity })
+                    .then(result => {
+                        this.$dispatch('cart-change', { count: result.count })
+                        this.$dispatch("notify", {
+                            message: "The item quantity was updated",
+                        });
+                    })
+            },
         };
     });
-
 });
 
 

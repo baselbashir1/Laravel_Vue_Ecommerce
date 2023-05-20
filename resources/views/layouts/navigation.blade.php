@@ -6,6 +6,7 @@
     <div>
         <a href="{{ route('home') }}" class="block py-navbar-item pl-5"> Logo </a>
     </div>
+
     <!-- Responsive Menu -->
     <div class="block fixed z-10 top-0 bottom-0 height h-full w-[220px] transition-all bg-slate-900 md:hidden"
         :class="mobileMenuOpen ? 'left-0' : '-left-[220px]'">
@@ -107,6 +108,7 @@
         </ul>
     </div>
     <!--/ Responsive Menu -->
+
     <nav class="hidden md:block">
         <ul class="grid grid-flow-col items-center">
             <li>
@@ -202,6 +204,7 @@
             @endif
         </ul>
     </nav>
+
     <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-4 block md:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
             stroke="currentColor" stroke-width="2">
