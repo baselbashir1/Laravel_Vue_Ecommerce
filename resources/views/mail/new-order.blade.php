@@ -6,8 +6,9 @@
     <tr>
         <th>Order ID</th>
         <td>
-            <a href="{{ $forAdmin ? env('BACKEND_URL').'/app/orders/'.$order->id : route('order.view', $order, true) }}">
-                {{$order->id}}
+            <a
+                href="{{ $forAdmin ? env('BACKEND_URL') . '/app/orders/' . $order->id : route('order.view', $order, true) }}">
+                {{ $order->id }}
             </a>
         </td>
     </tr>
@@ -17,11 +18,11 @@
     </tr>
     <tr>
         <th>Order Price</th>
-        <td>${{$order->total_price}}</td>
+        <td>${{ $order->total_price }}</td>
     </tr>
     <tr>
         <th>Order Date</th>
-        <td>${{$order->created_at}}</td>
+        <td>${{ $order->created_at }}</td>
     </tr>
 </table>
 <table>
@@ -31,14 +32,14 @@
         <th>Price</th>
         <th>Quantity</th>
     </tr>
-    @foreach($order->items as $item)
+    @foreach ($order->items as $item)
         <tr>
             <td>
-                <img src="{{$item->product->image}}" style="width: 100px">
+                <img src="{{ $item->product->image }}" style="width: 100px">
             </td>
-            <td>{{$item->product->title}}</td>
-            <td>${{$item->unit_price * $item->quantity}}</td>
-            <td>{{$item->quantity}}</td>
+            <td>{{ $item->product->title }}</td>
+            <td>${{ $item->unit_price * $item->quantity }}</td>
+            <td>{{ $item->quantity }}</td>
         </tr>
     @endforeach
 </table>

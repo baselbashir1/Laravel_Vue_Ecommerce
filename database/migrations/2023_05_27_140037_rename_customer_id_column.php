@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
-            $table->string('code', 3)->primary();
-            $table->string('name', 255);
-            $table->jsonb('states')->nullable();
+        Schema::table('customers', function (Blueprint $table) {
+            $table->renameColumn('id', 'user_id');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::table('customers', function (Blueprint $table) {
+            $table->renameColumn('user_id', 'id');
+        });
     }
 };

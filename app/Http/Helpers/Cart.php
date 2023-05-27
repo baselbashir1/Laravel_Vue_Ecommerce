@@ -9,7 +9,7 @@ class Cart
 {
     public static function getCartItemsCount(): int
     {
-        $request = \request();
+        $request = request();
         $user = $request->user();
 
         if ($user) {
@@ -27,7 +27,7 @@ class Cart
 
     public static function getCartItems()
     {
-        $request = \request();
+        $request = request();
         $user = $request->user();
 
         if ($user) {
@@ -41,7 +41,7 @@ class Cart
 
     public static function getCookieCartItems()
     {
-        $request = \request();
+        $request = request();
         return json_decode($request->cookie('cart_items', '[]'), true);
     }
 
@@ -54,9 +54,9 @@ class Cart
         );
     }
 
-    public static function moveCartItemsIntoDb()
+    public static function moveCartItemsIntoDB()
     {
-        $request = \request();
+        $request = request();
         $cartItems = self::getCookieCartItems();
         $dbCartItems = CartItem::where(['user_id' => $request->user()->id])->get()->keyBy('product_id');
         $newCartItems = [];
@@ -65,6 +65,7 @@ class Cart
             if (isset($dbCartItems[$cartItem['product_id']])) {
                 continue;
             }
+
             $newCartItems[] = [
                 'user_id' => $request->user()->id,
                 'product_id' => $cartItem['product_id'],

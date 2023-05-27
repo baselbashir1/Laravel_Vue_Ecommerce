@@ -85,11 +85,13 @@
                     <div x-show="expanded" x-collapse.min.120px class="text-gray-500 wysiwyg-content">
                         {{ $product->description }}
                     </div>
-                    <p class="text-right">
-                        <a @click="expanded = !expanded" href="javascript:void(0)"
-                            class="text-purple-500 hover:text-purple-700"
-                            x-text="expanded ? 'Read Less' : 'Read More'"></a>
-                    </p>
+                    @if ($product->description)
+                        <p class="text-right">
+                            <a @click="expanded = !expanded" href="javascript:void(0)"
+                                class="text-purple-500 hover:text-purple-700"
+                                x-text="expanded ? 'Read Less' : 'Read More'"></a>
+                        </p>
+                    @endif
                 </div>
             </div>
         </div>
