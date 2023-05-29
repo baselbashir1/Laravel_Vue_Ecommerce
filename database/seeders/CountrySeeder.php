@@ -20,14 +20,12 @@ class CountrySeeder extends Seeder
             "AR" => 'Arkansas',
             "CA" => 'California',
         ];
-
         $countries = [
             ['code' => 'geo', 'name' => 'Georgia', 'states' => null],
             ['code' => 'ind', 'name' => 'India', 'states' => null],
             ['code' => 'usa', 'name' => 'United States of America', 'states' => json_encode($usaStates)],
             ['code' => 'ger', 'name' => 'Germany', 'states' => null],
         ];
-
         Country::insert($countries);
     }
 }
