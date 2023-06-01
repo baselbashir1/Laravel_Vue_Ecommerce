@@ -54,8 +54,8 @@
                     </div>
                     <div class="mb-3">
                         <x-input type="text" name="email" value="{{ old('email', $user->email) }}"
-                            placeholder="Your Email"
-                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded" />
+                            placeholder="Your Email" disabled
+                            class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded bg-gray-200 " />
                     </div>
                     <div class="mb-3">
                         <x-input type="text" name="phone" value="{{ old('phone', $customer?->phone) }}"
