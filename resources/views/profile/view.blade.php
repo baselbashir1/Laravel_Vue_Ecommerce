@@ -45,10 +45,10 @@
                     @csrf
                     <h2 class="text-xl font-semibold mb-2">Profile Details</h2>
                     <div class="grid grid-cols-2 gap-3 mb-3">
-                        <x-input type="text" name="first_name" value="{{ old('first_name', $customer->first_name) }}"
+                        <x-input type="text" name="first_name" value="{{ old('first_name', $customer?->first_name) }}"
                             placeholder="First Name"
                             class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded" />
-                        <x-input type="text" name="last_name" value="{{ old('last_name', $customer->last_name) }}"
+                        <x-input type="text" name="last_name" value="{{ old('last_name', $customer?->last_name) }}"
                             placeholder="Last Name"
                             class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded" />
                     </div>
@@ -58,7 +58,7 @@
                             class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded" />
                     </div>
                     <div class="mb-3">
-                        <x-input type="text" name="phone" value="{{ old('phone', $customer->phone) }}"
+                        <x-input type="text" name="phone" value="{{ old('phone', $customer?->phone) }}"
                             placeholder="Your Phone"
                             class="w-full focus:border-purple-600 focus:ring-purple-600 border-gray-300 rounded" />
                     </div>

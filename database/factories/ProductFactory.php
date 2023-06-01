@@ -16,11 +16,21 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        // return [
+        //     'title' => fake()->text(),
+        //     'image' => fake()->imageUrl(),
+        //     'description' => fake()->realText(2000),
+        //     'price' => fake()->randomFloat(2, 2, 5),
+        //     'created_at' => now(),
+        //     'updated_at' => now(),
+        //     'created_by' => 1,
+        //     'updated_by' => 1,
+        // ];
+
         return [
-            'title' => fake()->text(),
-            'image' => fake()->imageUrl(),
-            'description' => fake()->realText(2000),
-            'price' => fake()->randomFloat(2, 2, 5),
+            'title' => 'HyperX Cloud II - Gaming Headset',
+            'image' => 'https://cdn.shopify.com/s/files/1/0561/8345/5901/products/hyperx_cloud_ii_red_2_main_mixer_900x.jpg?v=1680559410',
+            'price' => '69.00',
             'created_at' => now(),
             'updated_at' => now(),
             'created_by' => 1,
