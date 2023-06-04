@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\CustomerAddress;
 use App\Models\Country;
 use Illuminate\Support\Facades\Hash;
+use Stripe\Customer;
 
 class ProfileController extends Controller
 {
@@ -45,6 +46,16 @@ class ProfileController extends Controller
         $customer = $user->customer;
 
         $customer->update($customerData);
+        // if ($customer) {
+        //     $customer->update($customerData);
+        // } else {
+        //     $customer->create([
+        //         'user_id' => $user->id,
+        //         'first_name' => $request->first_name,
+        //         'last_name' => $request->last_name,
+        //         'phone' => $request->phone
+        //     ]);
+        // }
 
         if ($customer->shippingAddress) {
             $customer->shippingAddress->update($shippingData);
