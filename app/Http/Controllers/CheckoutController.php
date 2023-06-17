@@ -108,7 +108,7 @@ class CheckoutController extends Controller
                 throw new NotFoundHttpException();
             }
 
-            if ($payment->status === PaymentStatus::Pending) {
+            if ($payment->status === PaymentStatus::Pending->value) {
                 $this->updateOrderAndSession($payment);
             }
 
