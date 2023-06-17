@@ -57,7 +57,7 @@
             </table>
         </div>
         <div class="mt-3">
-            {{ $orders->links() }}
+            {{-- {{ $orders->links() }} --}}
         </div>
     </div>
 </x-app-layout>

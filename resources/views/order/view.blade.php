@@ -1,6 +1,6 @@
 <x-app-layout>
 
-    <div class="container mx-auto lg:w-2/3 p-5">
+    {{-- <div class="container mx-auto lg:w-2/3 p-5">
         <h1 class="text-3xl font-bold mb-2">Order #{{ $order->id }}</h1>
         <div class="bg-white rounded-lg p-3">
             <table>
@@ -68,5 +68,5 @@
                 </form>
             @endif
         </div>
-    </div>
+    </div> --}}
 </x-app-layout>
