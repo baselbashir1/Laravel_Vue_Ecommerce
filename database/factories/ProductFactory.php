@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -29,11 +30,13 @@ class ProductFactory extends Factory
         //     'updated_by' => 1,
         // ];
 
+        $files = Storage::files('public/images');
+        $randomFile = Arr::random($files);
+        $imageUrl = Storage::url($randomFile);
+
         return [
             'title' => 'HyperX Cloud II - Gaming Headset',
-            'image' => 'https://cdn.shopify.com/s/files/1/0561/8345/5901/products/hyperx_cloud_ii_red_2_main_mixer_900x.jpg?v=1680559410',
-            // 'image' => $this->faker->image('public/storage/images', 300, 300),
-            // 'image' => Storage::allFiles('public/storage/images/'),
+            'image' => $imageUrl,
             'price' => '69.00',
             'created_at' => now(),
             'updated_at' => now(),
