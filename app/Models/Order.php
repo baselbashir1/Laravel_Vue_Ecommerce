@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -27,5 +28,11 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public static function deleteUnpaidOrders($hours)
+    {
+        return Order::query()->where('status', OrderStatus::Unpaid->value)
+            ->where('created_at', '<', Carbon::now()->subHours($hours));
     }
 }
