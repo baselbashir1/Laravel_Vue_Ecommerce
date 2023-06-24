@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Auth;
 
+use App\Enums\CustomerStatus;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
@@ -49,6 +50,18 @@ class LoginRequest extends FormRequest
             ]);
         }
 
+        $user = $this->user();
+        $customer = $user->customer;
+        if ($customer->status !== CustomerStatus::Active->value) {
+            Auth::guard('web')->logout();
+            $this->session()->invalidate();
+            $this->session()->regenerateToken();
+
+            throw ValidationException::withMessages([
+                'email' => 'Your account has been disabled'
+            ]);
+        }
+
         RateLimiter::clear($this->throttleKey());
     }
 
@@ -80,6 +93,7 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
+        // return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
+        return Str::lower($this->input('email')) . '|' . $this->ip();
     }
 }

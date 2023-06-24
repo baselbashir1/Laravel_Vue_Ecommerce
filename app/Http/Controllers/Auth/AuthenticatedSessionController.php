@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Cart::moveCartItemsIntoDB();
+        Cart::moveCartItemsIntoDB();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
