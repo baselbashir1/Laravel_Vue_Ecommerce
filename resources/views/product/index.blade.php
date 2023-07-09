@@ -34,11 +34,13 @@
                     <h5 class="font-bold">${{ $product->price }}</h5>
                 </div>
 
-                <div class="flex justify-between py-3 px-4">
-                    <button class="btn-primary" @click="addToCart()">
-                        Add to Cart
-                    </button>
-                </div>
+                @auth
+                    <div class="flex justify-between py-3 px-4">
+                        <button class="btn-primary" @click="addToCart()">
+                            Add to Cart
+                        </button>
+                    </div>
+                @endauth
 
             </div>
             <!--/ Product Item -->
