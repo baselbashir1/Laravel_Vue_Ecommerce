@@ -45,17 +45,18 @@ class ProfileController extends Controller
         /** @var \App\Models\Customer $customer */
         $customer = $user->customer;
 
-        $customer->update($customerData);
-        // if ($customer) {
-        //     $customer->update($customerData);
-        // } else {
-        //     $customer->create([
-        //         'user_id' => $user->id,
-        //         'first_name' => $request->first_name,
-        //         'last_name' => $request->last_name,
-        //         'phone' => $request->phone
-        //     ]);
-        // }
+        // $customer->update($customerData);
+        if ($customer) {
+            $customer->update($customerData);
+        } else {
+            // $customer->create($customerData);
+            $customer->create([
+                'user_id' => $user->id,
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'phone' => $request->phone
+            ]);
+        }
 
         if ($customer->shippingAddress) {
             $customer->shippingAddress->update($shippingData);
